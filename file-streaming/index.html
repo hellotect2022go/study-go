@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go 파일 서버 테스트</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 50px auto; line-height: 1.6; padding: 0 20px; }
+        section { border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        h2 { margin-top: 0; color: #333; }
+        input[type="text"] { width: 70%; padding: 8px; }
+        button { padding: 8px 15px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; }
+        button:hover { background-color: #0056b3; }
+        .info { font-size: 0.9em; color: #666; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>Go 파일 서버 테스터</h1>
+
+    <section>
+        <h2>1. 파일 업로드</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">업로드 시작</button>
+        </form>
+        <p class="info">서버의 <code>/upload</code> 핸들러를 사용합니다.</p>
+    </section>
+
+    <section>
+        <h2>2. 파일 다운로드</h2>
+        <form action="/download" method="GET">
+            <input type="text" name="file" placeholder="파일명 입력 (예: test.jpg)" required>
+            <button type="submit">다운로드</button>
+        </form>
+        <p class="info">서버의 <code>/download</code> 핸들러를 사용합니다.</p>
+    </section>
+
+    <section>
+        <h2>3. 이어받기 다운로드 (Range)</h2>
+        <form action="/range-download" method="GET">
+            <input type="text" name="file" placeholder="파일명 입력" required>
+            <button type="submit" style="background-color: #28a745;">부분 요청 테스트</button>
+        </form>
+        <p class="info">서버의 <code>/range-download</code> 핸들러를 사용합니다.</p>
+    </section>
+
+    <section>
+        <h2>4. 저장된 파일 확인</h2>
+        <a href="/files/" target="_blank">
+            <button type="button" style="background-color: #6c757d;">uploads 폴더 열기</button>
+        </a>
+        <p class="info"><code>http.FileServer</code>를 통해 <code>/uploads</code> 폴더 브라우징</p>
+    </section>
+
+</body>
+</html>
